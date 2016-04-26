@@ -29,9 +29,9 @@ public class PhoneBookControllerIT {
     }
 
     @Test
-    public void simpleTest() {
+    public void readContacts() {
         when()
-                .get(PhoneBookController.HOME)
+                .get(PhoneBookController.CONTACTS)
                 .then()
                 .statusCode(HttpStatus.SC_OK)
                 .body("firstName", hasItems("Chie", "Yosuke", "Yu", "Yukiko"));

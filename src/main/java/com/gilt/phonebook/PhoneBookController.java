@@ -11,14 +11,14 @@ import static com.gilt.phonebook.SortDirection.ascending;
 @RestController
 public class PhoneBookController {
 
-    public static final String HOME = "/";
+    public static final String CONTACTS = "/contacts";
 
     @Inject
     private PhoneBookService phoneBookService;
 
-    @RequestMapping(HOME)
+    @RequestMapping(CONTACTS)
     @ResponseBody
-    Iterable<Entry> home() {
+    Iterable<Entry> readContacts() {
         return phoneBookService.getContacts(ascending);
     }
 
