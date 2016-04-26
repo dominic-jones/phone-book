@@ -2,17 +2,21 @@ package com.gilt.phonebook;
 
 public class Entry {
 
-    private String name;
+    private String firstName;
 
-    public Entry(String name) {
-        this.name = name;
+    public Entry(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getName() {
-        return name;
+    public Entry(EntryEntity entryEntity) {
+        this.firstName = entryEntity.getFirstName();
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 }

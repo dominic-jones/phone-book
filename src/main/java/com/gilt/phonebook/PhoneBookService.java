@@ -3,13 +3,18 @@ package com.gilt.phonebook;
 import com.google.common.collect.Ordering;
 import org.springframework.stereotype.Service;
 
+import javax.inject.Inject;
+
 import static com.gilt.phonebook.SortDirection.ascending;
-import static com.google.common.collect.Lists.newArrayList;
+import static com.google.common.collect.Iterables.transform;
 
 @Service
 public class PhoneBookService {
 
-    private static final Ordering<Entry> ENTRY_ORDERING = Ordering.natural().onResultOf(Entry::getName);
+    private static final Ordering<Entry> ENTRY_ORDERING = Ordering.natural().onResultOf(Entry::getFirstName);
+
+    @Inject
+    private EntryRepository entryRepository;
 
     public Iterable<Entry> getContacts(SortDirection sortDirection) {
 
@@ -18,14 +23,11 @@ public class PhoneBookService {
                         ? ENTRY_ORDERING
                         : ENTRY_ORDERING.reverse();
 
-        return entryOrdering.immutableSortedCopy(data());
-    }
-
-    private Iterable<Entry> data() {
-        return newArrayList(
-                new Entry("testZeta"),
-                new Entry("testOne"),
-                new Entry("testTwo")
+        return entryOrdering.immutableSortedCopy(
+                transform(
+                        entryRepository.findAll(),
+                        Entry::new
+                )
         );
     }
 }

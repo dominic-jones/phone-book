@@ -34,6 +34,6 @@ public class PhoneBookControllerIT {
                 .get(PhoneBookController.HOME)
                 .then()
                 .statusCode(HttpStatus.SC_OK)
-                .body("name", hasItems("testOne", "testTwo"));
+                .body("firstName", hasItems("Chie", "Yosuke", "Yu", "Yukiko"));
     }
 }
