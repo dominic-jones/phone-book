@@ -1,7 +1,7 @@
 package com.gilt.phonebook;
 
 import com.jayway.restassured.RestAssured;
-import org.apache.http.HttpStatus;
+import com.jayway.restassured.http.ContentType;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,7 +11,9 @@ import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
+import static com.jayway.restassured.RestAssured.given;
 import static com.jayway.restassured.RestAssured.when;
+import static org.apache.http.HttpStatus.SC_OK;
 import static org.hamcrest.Matchers.hasItems;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -33,7 +35,18 @@ public class PhoneBookControllerIT {
         when()
                 .get(PhoneBookController.CONTACTS)
                 .then()
-                .statusCode(HttpStatus.SC_OK)
+                .statusCode(SC_OK)
                 .body("firstName", hasItems("Chie", "Yosuke", "Yu", "Yukiko"));
+    }
+
+    @Test
+    public void createContact() {
+        given()
+                .contentType(ContentType.JSON)
+                .body(new CreateContact("Rise"))
+                .when()
+                .post(PhoneBookController.CONTACTS + PhoneBookController.CREATE)
+                .then()
+                .statusCode(SC_OK);
     }
 }
