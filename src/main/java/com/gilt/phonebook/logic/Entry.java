@@ -1,4 +1,6 @@
-package com.gilt.phonebook;
+package com.gilt.phonebook.logic;
+
+import com.gilt.phonebook.repository.EntryEntity;
 
 public class Entry {
 

@@ -1,5 +1,7 @@
-package com.gilt.phonebook;
+package com.gilt.phonebook.controller;
 
+import com.gilt.phonebook.logic.Entry;
+import com.gilt.phonebook.logic.PhoneBookService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -10,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.inject.Inject;
 import javax.validation.Valid;
 
-import static com.gilt.phonebook.SortDirection.ascending;
+import static com.gilt.phonebook.logic.SortDirection.ascending;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @RestController

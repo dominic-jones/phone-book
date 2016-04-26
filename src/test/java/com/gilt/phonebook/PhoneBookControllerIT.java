@@ -1,5 +1,7 @@
 package com.gilt.phonebook;
 
+import com.gilt.phonebook.controller.CreateContact;
+import com.gilt.phonebook.controller.PhoneBookController;
 import com.jayway.restassured.RestAssured;
 import com.jayway.restassured.http.ContentType;
 import org.junit.Before;
@@ -11,7 +13,7 @@ import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-import static com.gilt.phonebook.PhoneType.work;
+import static com.gilt.phonebook.logic.PhoneType.work;
 import static com.jayway.restassured.RestAssured.given;
 import static com.jayway.restassured.RestAssured.when;
 import static org.apache.http.HttpStatus.SC_OK;

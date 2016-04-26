@@ -1,5 +1,6 @@
-package com.gilt.phonebook;
+package com.gilt.phonebook.repository;
 
+import com.gilt.phonebook.logic.PhoneType;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.Column;

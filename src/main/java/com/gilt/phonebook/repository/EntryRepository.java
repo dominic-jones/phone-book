@@ -1,4 +1,4 @@
-package com.gilt.phonebook;
+package com.gilt.phonebook.repository;
 
 import org.springframework.stereotype.Repository;
 
@@ -12,7 +12,7 @@ public class EntryRepository {
     @PersistenceContext
     private EntityManager entityManager;
 
-    Iterable<EntryEntity> findAll() {
+    public Iterable<EntryEntity> findAll() {
         TypedQuery<EntryEntity> query = entityManager.createQuery("SELECT e FROM EntryEntity e", EntryEntity.class);
         return query.getResultList();
     }

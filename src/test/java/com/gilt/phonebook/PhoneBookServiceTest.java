@@ -1,5 +1,10 @@
 package com.gilt.phonebook;
 
+import com.gilt.phonebook.controller.CreateContact;
+import com.gilt.phonebook.logic.Entry;
+import com.gilt.phonebook.logic.PhoneBookService;
+import com.gilt.phonebook.repository.EntryEntity;
+import com.gilt.phonebook.repository.EntryRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,10 +16,10 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.List;
 
-import static com.gilt.phonebook.PhoneType.cell;
-import static com.gilt.phonebook.PhoneType.work;
-import static com.gilt.phonebook.SortDirection.ascending;
-import static com.gilt.phonebook.SortDirection.descending;
+import static com.gilt.phonebook.logic.PhoneType.cell;
+import static com.gilt.phonebook.logic.PhoneType.work;
+import static com.gilt.phonebook.logic.SortDirection.ascending;
+import static com.gilt.phonebook.logic.SortDirection.descending;
 import static com.google.common.collect.Iterables.transform;
 import static com.google.common.collect.Lists.newArrayList;
 import static com.google.common.collect.Lists.reverse;

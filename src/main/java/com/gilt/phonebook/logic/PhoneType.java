@@ -1,4 +1,4 @@
-package com.gilt.phonebook;
+package com.gilt.phonebook.logic;
 
 public enum PhoneType {
 
