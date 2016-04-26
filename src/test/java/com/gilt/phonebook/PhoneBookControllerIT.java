@@ -15,7 +15,7 @@ import static com.jayway.restassured.RestAssured.when;
 import static org.hamcrest.Matchers.hasItems;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = PhoneBookServiceApplication.class)
+@SpringApplicationConfiguration(classes = PhoneBookApplication.class)
 @WebAppConfiguration
 @IntegrationTest("server.port:0")
 public class PhoneBookControllerIT {
