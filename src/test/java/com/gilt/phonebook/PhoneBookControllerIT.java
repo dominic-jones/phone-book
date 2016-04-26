@@ -52,4 +52,12 @@ public class PhoneBookControllerIT {
                 .then()
                 .statusCode(SC_OK);
     }
+
+    @Test
+    public void deleteContact() {
+        given()
+                .delete(PhoneBookController.CONTACTS + "/{id}/delete", 2)
+                .then()
+                .statusCode(SC_OK);
+    }
 }

@@ -43,4 +43,8 @@ public class PhoneBookService {
                 contact.getPhoneNumber()
         ));
     }
+
+    public void delete(long id) {
+        entryRepository.delete(id);
+    }
 }
