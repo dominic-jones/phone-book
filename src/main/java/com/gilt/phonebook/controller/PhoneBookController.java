@@ -15,6 +15,7 @@ import javax.validation.Valid;
 import static com.gilt.phonebook.logic.SortDirection.ascending;
 import static org.springframework.web.bind.annotation.RequestMethod.DELETE;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
+import static org.springframework.web.bind.annotation.RequestMethod.PUT;
 
 @RestController
 @RequestMapping(PhoneBookController.CONTACTS)
@@ -33,15 +34,24 @@ public class PhoneBookController implements Loggable {
     }
 
     @RequestMapping(value = CREATE, method = POST)
-    void post(@RequestBody @Valid CreateContact contact) {
+    void createContact(@RequestBody @Valid CreateContact contact) {
 
         log().info("Creating contact with firstName `{}`", contact.getFirstName());
 
         phoneBookService.createContact(contact);
     }
 
+    @RequestMapping(value = "/{id}/edit", method = PUT)
+    void editContact(@PathVariable("id") long id,
+                     @RequestBody @Valid CreateContact contact) {
+
+        log().info("Editing contact `{}` with firstName `{}`", id, contact.getFirstName());
+
+        phoneBookService.editContact(id, contact);
+    }
+
     @RequestMapping(value = "/{id}/delete", method = DELETE)
-    void delete(@PathVariable("id") long id) {
+    void deleteContact(@PathVariable("id") long id) {
 
         log().info("Deleting contact with id `{}`", id);
 

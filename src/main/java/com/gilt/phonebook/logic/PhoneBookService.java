@@ -47,4 +47,9 @@ public class PhoneBookService {
     public void delete(long id) {
         entryRepository.delete(id);
     }
+
+    public void editContact(long id,
+                            CreateContact contact) {
+        entryRepository.edit(id, contact);
+    }
 }

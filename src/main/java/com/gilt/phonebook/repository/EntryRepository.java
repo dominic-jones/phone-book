@@ -1,5 +1,6 @@
 package com.gilt.phonebook.repository;
 
+import com.gilt.phonebook.controller.CreateContact;
 import com.gilt.phonebook.util.Loggable;
 import org.springframework.stereotype.Repository;
 
@@ -31,5 +32,19 @@ public class EntryRepository implements Loggable {
         }
 
         entityManager.remove(entity);
+    }
+
+    public void edit(long id,
+                     CreateContact contact) {
+        EntryEntity entity = entityManager.find(EntryEntity.class, id);
+
+        if (entity == null) {
+            throw new IllegalArgumentException("Delete failed with id `{" + id + "}` - contact not found");
+        }
+
+        entity.setFirstName(contact.getFirstName());
+        entity.setLastName(contact.getLastName());
+        entity.setPhoneType(contact.getPhoneType());
+        entity.setPhoneNumber(contact.getPhoneNumber());
     }
 }
