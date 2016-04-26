@@ -9,7 +9,9 @@ import static com.google.common.collect.Lists.newArrayList;
 @RestController
 public class PhoneBookController {
 
-    @RequestMapping("/")
+    public static final String HOME = "/";
+
+    @RequestMapping(HOME)
     @ResponseBody
     Iterable<Entry> home() {
         return newArrayList(

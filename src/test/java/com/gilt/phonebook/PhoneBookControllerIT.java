@@ -31,7 +31,7 @@ public class PhoneBookControllerIT {
     @Test
     public void simpleTest() {
         when()
-                .get("/")
+                .get(PhoneBookController.HOME)
                 .then()
                 .statusCode(HttpStatus.SC_OK)
                 .body("name", hasItems("testOne", "testTwo"));
