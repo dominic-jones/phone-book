@@ -1,12 +1,20 @@
 package com.gilt.phonebook.repository;
 
 import com.gilt.phonebook.controller.CreateContact;
+import com.gilt.phonebook.logic.SortDirection;
+import com.gilt.phonebook.logic.SortField;
 import com.gilt.phonebook.util.Loggable;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Order;
+import javax.persistence.criteria.Path;
+import javax.persistence.criteria.Root;
+
+import static com.gilt.phonebook.logic.SortDirection.ascending;
 
 @Repository
 public class EntryRepository implements Loggable {
@@ -14,9 +22,22 @@ public class EntryRepository implements Loggable {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public Iterable<EntryEntity> findAll() {
-        TypedQuery<EntryEntity> query = entityManager.createQuery("SELECT e FROM EntryEntity e", EntryEntity.class);
-        return query.getResultList();
+    public Iterable<EntryEntity> findAll(SortField sortField,
+                                         SortDirection sortDirection) {
+
+        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+        CriteriaQuery<EntryEntity> query = cb.createQuery(EntryEntity.class);
+        Root<EntryEntity> root = query.from(EntryEntity.class);
+
+        query.select(root);
+
+        Path<Object> sortFieldPath = root.get(sortField.toString());
+        Order order = sortDirection == ascending
+                ? cb.asc(sortFieldPath)
+                : cb.desc(sortFieldPath);
+        query.orderBy(order);
+
+        return entityManager.createQuery(query).getResultList();
     }
 
     public void create(EntryEntity entryEntity) {

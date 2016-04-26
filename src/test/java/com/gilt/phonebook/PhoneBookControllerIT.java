@@ -17,8 +17,8 @@ import static com.jayway.restassured.RestAssured.given;
 import static com.jayway.restassured.RestAssured.when;
 import static com.jayway.restassured.http.ContentType.JSON;
 import static org.apache.http.HttpStatus.SC_OK;
+import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.hasItems;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = PhoneBookApplication.class)
@@ -40,7 +40,7 @@ public class PhoneBookControllerIT {
                 .get(PhoneBookController.CONTACTS)
                 .then()
                 .statusCode(SC_OK)
-                .body("firstName", hasItems("Chie", "Yosuke", "Yu", "Yukiko"));
+                .body("firstName", contains("Chie", "Yosuke", "Yu", "Yukiko"));
     }
 
     @Test

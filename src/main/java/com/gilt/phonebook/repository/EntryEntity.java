@@ -10,27 +10,67 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "entries")
+@NamedQueries({
+        @NamedQuery(
+                name = EntryEntity.Query.SORT_BY_FIRST_NAME_ASC,
+                query = "SELECT e" +
+                        " FROM EntryEntity e" +
+                        " ORDER BY firstName ASC"
+        ),
+        @NamedQuery(
+                name = EntryEntity.Query.SORT_BY_FIRST_NAME_DESC,
+                query = "SELECT e" +
+                        " FROM EntryEntity e" +
+                        " ORDER BY firstName DESC "
+        ),
+        @NamedQuery(
+                name = EntryEntity.Query.SORT_BY_LAST_NAME_ASC,
+                query = "SELECT e" +
+                        " FROM EntryEntity e" +
+                        " ORDER BY lastName ASC"
+        ),
+        @NamedQuery(
+                name = EntryEntity.Query.SORT_BY_LAST_NAME_DESC,
+                query = "SELECT e" +
+                        " FROM EntryEntity e" +
+                        " ORDER BY lastName DESC"
+        )
+})
 public class EntryEntity {
+
+    interface Query {
+
+        String SORT_BY_FIRST_NAME_ASC = "Entry.Query.sortByFirstNameAsc";
+        String SORT_BY_FIRST_NAME_DESC = "Entry.Query.sortByFirstNameDesc";
+        String SORT_BY_LAST_NAME_ASC = "Entry.Query.sortByLastNameAsc";
+        String SORT_BY_LAST_NAME_DESC = "Entry.Query.sortByLastNameDesc";
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
     @NotNull
     @NotEmpty
     @Column(nullable = false)
     private String firstName;
+
     @NotNull
     @NotEmpty
     @Column(nullable = false)
     private String lastName;
+
     @Enumerated(EnumType.STRING)
     @Column
     private PhoneType phoneType;
+
     @NotNull
     @NotEmpty
     @Column

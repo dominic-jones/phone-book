@@ -2,6 +2,8 @@ package com.gilt.phonebook.controller;
 
 import com.gilt.phonebook.logic.Entry;
 import com.gilt.phonebook.logic.PhoneBookService;
+import com.gilt.phonebook.logic.SortDirection;
+import com.gilt.phonebook.logic.SortField;
 import com.gilt.phonebook.util.Loggable;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,8 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
+import javax.websocket.server.PathParam;
 
-import static com.gilt.phonebook.logic.SortDirection.ascending;
 import static org.springframework.web.bind.annotation.RequestMethod.DELETE;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 import static org.springframework.web.bind.annotation.RequestMethod.PUT;
@@ -27,10 +29,11 @@ public class PhoneBookController implements Loggable {
     @Inject
     private PhoneBookService phoneBookService;
 
-    @RequestMapping
     @ResponseBody
-    Iterable<Entry> readContacts() {
-        return phoneBookService.getContacts(ascending);
+    @RequestMapping
+    Iterable<Entry> readContacts(@PathParam("sortField") SortField sortField,
+                                 @PathParam("sortDirection") SortDirection sortDirection) {
+        return phoneBookService.getContacts(sortField, sortDirection);
     }
 
     @RequestMapping(value = CREATE, method = POST)
