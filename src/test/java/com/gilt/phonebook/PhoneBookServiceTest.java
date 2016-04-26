@@ -9,9 +9,9 @@ public class PhoneBookServiceTest {
     private PhoneBookService phoneBookService = new PhoneBookService();
 
     @Test
-    public void givenDummyServiceThenPass() {
+    public void givenValidWhenGettingContactsThenReturnAll() {
         Iterable<Entry> result = phoneBookService.getContacts();
 
-        assertThat(result).isEmpty();
+        assertThat(result).isNotEmpty();
     }
 }
