@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.inject.Inject;
 
+import static com.gilt.phonebook.SortDirection.ascending;
+
 @RestController
 public class PhoneBookController {
 
@@ -17,7 +19,7 @@ public class PhoneBookController {
     @RequestMapping(HOME)
     @ResponseBody
     Iterable<Entry> home() {
-        return phoneBookService.getContacts();
+        return phoneBookService.getContacts(ascending);
     }
 
 }
