@@ -2,7 +2,6 @@ package com.gilt.phonebook;
 
 import com.jayway.restassured.RestAssured;
 import org.apache.http.HttpStatus;
-import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,6 +12,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import static com.jayway.restassured.RestAssured.when;
+import static org.hamcrest.Matchers.hasItems;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = PhoneBookServiceApplication.class)
@@ -34,6 +34,6 @@ public class PhoneBookControllerIT {
                 .get("/")
                 .then()
                 .statusCode(HttpStatus.SC_OK)
-        .body("name", Matchers.is("test"));
+                .body("name", hasItems("testOne", "testTwo"));
     }
 }

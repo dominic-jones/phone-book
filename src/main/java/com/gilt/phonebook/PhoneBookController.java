@@ -4,12 +4,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import static com.google.common.collect.Lists.newArrayList;
+
 @RestController
 public class PhoneBookController {
 
     @RequestMapping("/")
     @ResponseBody
-    Entry home() {
-        return new Entry("test");
+    Iterable<Entry> home() {
+        return newArrayList(
+                new Entry("testOne"),
+                new Entry("testTwo")
+        );
     }
 }
