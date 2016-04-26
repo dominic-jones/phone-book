@@ -10,6 +10,7 @@ public class PhoneBookService {
     public Iterable<Entry> getContacts() {
 
         return newArrayList(
+                new Entry("testZeta"),
                 new Entry("testOne"),
                 new Entry("testTwo")
         );
