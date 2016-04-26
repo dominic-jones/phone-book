@@ -18,7 +18,7 @@ import static com.jayway.restassured.RestAssured.when;
 @SpringApplicationConfiguration(classes = PhoneBookServiceApplication.class)
 @WebAppConfiguration
 @IntegrationTest("server.port:0")
-public class PhoneBookControllerTest {
+public class PhoneBookControllerIT {
 
     @Value("${local.server.port}")
     private int port;
