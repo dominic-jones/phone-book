@@ -14,14 +14,24 @@ public class CreateContact {
     @NotEmpty
     private String lastName;
 
+    private PhoneType phoneType;
+
+    @NotNull
+    @NotEmpty
+    private String phoneNumber;
+
     public CreateContact() {
     }
 
     public CreateContact(String firstName,
-                         String lastName) {
+                         String lastName,
+                         PhoneType phoneType,
+                         String phoneNumber) {
 
         this.firstName = firstName;
         this.lastName = lastName;
+        this.phoneType = phoneType;
+        this.phoneNumber = phoneNumber;
     }
 
     public String getFirstName() {
@@ -30,5 +40,13 @@ public class CreateContact {
 
     public String getLastName() {
         return lastName;
+    }
+
+    public PhoneType getPhoneType() {
+        return phoneType;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 }

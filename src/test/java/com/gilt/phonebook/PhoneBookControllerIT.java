@@ -11,6 +11,7 @@ import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
+import static com.gilt.phonebook.PhoneType.work;
 import static com.jayway.restassured.RestAssured.given;
 import static com.jayway.restassured.RestAssured.when;
 import static org.apache.http.HttpStatus.SC_OK;
@@ -43,7 +44,7 @@ public class PhoneBookControllerIT {
     public void createContact() {
         given()
                 .contentType(ContentType.JSON)
-                .body(new CreateContact("Rise", "Kujikawa"))
+                .body(new CreateContact("Rise", "Kujikawa", work, "0111751247"))
                 .when()
                 .post(PhoneBookController.CONTACTS + PhoneBookController.CREATE)
                 .then()
