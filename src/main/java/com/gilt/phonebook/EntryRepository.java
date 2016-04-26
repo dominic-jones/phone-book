@@ -16,4 +16,8 @@ public class EntryRepository {
         TypedQuery<EntryEntity> query = entityManager.createQuery("SELECT e FROM EntryEntity e", EntryEntity.class);
         return query.getResultList();
     }
+
+    public void create(EntryEntity entryEntity) {
+        entityManager.persist(entryEntity);
+    }
 }

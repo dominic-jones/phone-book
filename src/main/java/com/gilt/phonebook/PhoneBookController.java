@@ -34,5 +34,7 @@ public class PhoneBookController {
     @RequestMapping(value = CREATE, method = POST)
     void post(@RequestBody @Valid CreateContact contact) {
         log.info("Creating contact with firstName `{}`", contact.getFirstName());
+
+        phoneBookService.createContact(contact);
     }
 }

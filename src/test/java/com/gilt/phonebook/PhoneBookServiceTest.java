@@ -3,6 +3,8 @@ package com.gilt.phonebook;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
@@ -16,6 +18,7 @@ import static com.google.common.collect.Lists.newArrayList;
 import static com.google.common.collect.Lists.reverse;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
 public class PhoneBookServiceTest {
@@ -32,10 +35,13 @@ public class PhoneBookServiceTest {
     @InjectMocks
     private PhoneBookService phoneBookService;
 
+    @Captor
+    ArgumentCaptor<EntryEntity> contactCaptor;
+
     @Before
     public void setUp() {
         given(entryRepository.findAll())
-                .willReturn(transform(CONTACTS, this::create));
+                .willReturn(transform(CONTACTS, EntryEntity::new));
     }
 
     @Test
@@ -56,7 +62,14 @@ public class PhoneBookServiceTest {
         ).containsExactlyElementsOf(reverse(CONTACTS));
     }
 
-    EntryEntity create(String firstName) {
-        return new EntryEntity(firstName);
+    @Test
+    public void givenValidWhenCreatingThenCreateValidEntity() {
+        String firstName = "Rise";
+        phoneBookService.createContact(new CreateContact(firstName));
+
+        verify(entryRepository).create(contactCaptor.capture());
+        assertThat(contactCaptor.getValue())
+                .extracting(EntryEntity::getFirstName)
+                .containsExactly(firstName);
     }
 }
