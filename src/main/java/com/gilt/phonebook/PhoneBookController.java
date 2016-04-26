@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class PhoneBookController {
 
-    @RequestMapping(name = "/", produces = "application/json")
+    @RequestMapping("/")
     @ResponseBody
-    String home() {
-        return "{\"name\":\"test\"}";
+    Entry home() {
+        return new Entry("test");
     }
 }
