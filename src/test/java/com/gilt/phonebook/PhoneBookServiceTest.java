@@ -15,6 +15,6 @@ public class PhoneBookServiceTest {
 
         assertThat(
                 transform(result, Entry::getName)
-        ).containsExactly("testZeta", "testOne", "testTwo");
+        ).containsExactly("testOne", "testTwo", "testZeta" );
     }
 }
