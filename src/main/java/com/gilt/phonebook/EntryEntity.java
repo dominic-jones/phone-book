@@ -17,8 +17,10 @@ public class EntryEntity {
     public EntryEntity() {
     }
 
-    public EntryEntity(String firstName) {
+    public EntryEntity(String firstName,
+                       String lastName) {
         this.firstName = firstName;
+        this.lastName = lastName;
     }
 
     @Id
@@ -30,11 +32,20 @@ public class EntryEntity {
     @Column(nullable = false)
     private String firstName;
 
+    @NotNull
+    @NotEmpty
+    @Column(nullable = false)
+    private String lastName;
+
     public Long getId() {
         return id;
     }
 
     public String getFirstName() {
         return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
     }
 }

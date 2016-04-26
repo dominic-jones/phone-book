@@ -43,7 +43,7 @@ public class PhoneBookControllerIT {
     public void createContact() {
         given()
                 .contentType(ContentType.JSON)
-                .body(new CreateContact("Rise"))
+                .body(new CreateContact("Rise", "Kujikawa"))
                 .when()
                 .post(PhoneBookController.CONTACTS + PhoneBookController.CREATE)
                 .then()

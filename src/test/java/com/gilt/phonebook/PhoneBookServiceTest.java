@@ -41,7 +41,7 @@ public class PhoneBookServiceTest {
     @Before
     public void setUp() {
         given(entryRepository.findAll())
-                .willReturn(transform(CONTACTS, EntryEntity::new));
+                .willReturn(transform(CONTACTS, e -> new EntryEntity(e, e)));
     }
 
     @Test
@@ -65,7 +65,8 @@ public class PhoneBookServiceTest {
     @Test
     public void givenValidWhenCreatingThenCreateValidEntity() {
         String firstName = "Rise";
-        phoneBookService.createContact(new CreateContact(firstName));
+        String lastName = "Kujikawa";
+        phoneBookService.createContact(new CreateContact(firstName, lastName));
 
         verify(entryRepository).create(contactCaptor.capture());
         assertThat(contactCaptor.getValue())

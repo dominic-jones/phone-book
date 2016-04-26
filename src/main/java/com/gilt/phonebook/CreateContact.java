@@ -10,15 +10,25 @@ public class CreateContact {
     @NotEmpty
     private String firstName;
 
+    @NotNull
+    @NotEmpty
+    private String lastName;
+
     public CreateContact() {
     }
 
-    public CreateContact(String firstName) {
+    public CreateContact(String firstName,
+                         String lastName) {
 
         this.firstName = firstName;
+        this.lastName = lastName;
     }
 
     public String getFirstName() {
         return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
     }
 }

@@ -34,6 +34,9 @@ public class PhoneBookService {
     }
 
     public void createContact(CreateContact contact) {
-        entryRepository.create(new EntryEntity(contact.getFirstName()));
+        entryRepository.create(new EntryEntity(
+                contact.getFirstName(),
+                contact.getLastName()
+        ));
     }
 }
